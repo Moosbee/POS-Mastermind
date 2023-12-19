@@ -11,8 +11,15 @@ configure<JavaApplication> {
     mainClass = "pos.mastermind.Main"
 }
 
-tasks.jar {
-    manifest.attributes["Main-Class"] = "pos.mastermind.Main"
+
+tasks {
+    jar {
+        manifest.attributes["Main-Class"] = "pos.mastermind.Main"
+    }
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 repositories {
