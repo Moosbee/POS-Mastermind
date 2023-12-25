@@ -1,5 +1,6 @@
 package pos.mastermind;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Password {
@@ -15,13 +16,33 @@ public class Password {
         this(genCombination(combinationSize));
     }
 
-    public enum BaseSet {
-        Red,
-        Yellow,
-        Green,
-        Blue,
-        Black,
-        White,
+    public enum Stat {
+        Wrong,
+        Exists,
+        Right
+    }
+
+    public BaseSet[] getCombination() {
+        return combination;
+    }
+
+    public Stat[] passwordCompare(Password otherPassword) {
+        BaseSet[] otherSet = otherPassword.combination;
+        int length = Math.max(combination.length, otherSet.length);
+        Stat[] returnStats = new Stat[length];
+
+        for (int i = 0; i < length; i++) {
+            BaseSet set = otherSet[i];
+            if (set == combination[i]) {
+                returnStats[i] = Stat.Right;
+            } else if (Arrays.stream(combination).anyMatch(f -> (f == set))) {
+                returnStats[i] = Stat.Exists;
+            } else {
+                returnStats[i] = Stat.Wrong;
+            }
+        }
+
+        return returnStats;
     }
 
     public static BaseSet[] genCombination(int combinationSize) {

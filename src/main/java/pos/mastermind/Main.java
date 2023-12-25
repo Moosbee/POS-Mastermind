@@ -1,13 +1,13 @@
 package pos.mastermind;
 
-import java.io.IOException;
-
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) throws IOException {
-        UI display = new UI(new GameLogic(5));
+    public static void main(String[] args) {
+        UI display = new UI();
 
         display.run();
+
+        display.exit();
     }
 }

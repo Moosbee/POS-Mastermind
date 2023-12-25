@@ -17,4 +17,16 @@ public class GameLogic {
     public Password getPassword() {
         return password;
     }
+
+
+    public Password.Stat[] checkPassword(Password otherPassword) {
+
+        trys.add(otherPassword);
+
+        return password.passwordCompare(otherPassword);
+    }
+
+    public List<Password> getTries() {
+        return trys;
+    }
 }
