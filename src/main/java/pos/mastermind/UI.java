@@ -64,9 +64,9 @@ public class UI {
 
     public void run() throws InterruptedException {
         System.out.println();
-        System.out.print(ansi().render("@|green L|@@|blue e|@@|red g|@@|magenta e|@@|yellow n|@@|blue d|@@|cyan e|@@|white :|@").reset());
-        System.out.print(ansi().fgBright(Ansi.Color.BLACK).a("W: Wrong, diese Farbe existiert in der Kombination nicht; ").reset());
-        System.out.println(ansi().render("@|white E: Exists, diese Farbe ist in der Kombination vorhanden, aber die stelle ist falsch; |@@|green R: Right, die Farbe und Position stimmen|@").reset());
+        System.out.println(ansi().render("@|green L|@@|blue e|@@|red g|@@|magenta e|@@|yellow n|@@|blue d|@@|cyan e|@@|white :|@").reset());
+        System.out.println(ansi().fgBright(Ansi.Color.BLACK).a("     W: Wrong, diese Farbe existiert in der Kombination nicht; ").reset());
+        System.out.println(ansi().render("     @|white E: Exists, diese Farbe ist in der Kombination vorhanden, aber die stelle ist falsch; |@\n     @|green R: Right, die Farbe und Position stimmen|@").reset());
 //        System.out.println(ansi().render("@|green L|@@|blue e|@@|red g|@@|magenta e|@@|yellow n|@@|blue d|@@|cyan e|@@|white :|@").reset().toString() + ansi().a("W: Wrong, diese Farbe existiert in der Kombination nicht; ") + ansi().format("@|white E: Exists, diese Farbe ist in der Kombination vorhanden, aber die stelle ist falsch; |@@|green R: Right, die Farbe und Position stimmen |@").reset());
         System.out.println();
         printLegend();
