@@ -1,5 +1,7 @@
 package pos.mastermind;
 
+import org.fusesource.jansi.Ansi;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -17,13 +19,23 @@ public class Password {
     }
 
     public enum Stat {
-        Wrong,
-        Exists,
-        Right
+        Wrong(Ansi.Color.BLACK),
+        Exists(Ansi.Color.WHITE),
+        Right(Ansi.Color.GREEN);
+
+        public final Ansi.Color color;
+
+        Stat(Ansi.Color color) {
+            this.color = color;
+        }
     }
 
     public BaseSet[] getCombination() {
         return combination;
+    }
+
+    public int length() {
+        return combination.length;
     }
 
     public Stat[] passwordCompare(Password otherPassword) {

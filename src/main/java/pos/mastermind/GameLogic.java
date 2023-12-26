@@ -10,8 +10,15 @@ public class GameLogic {
 
     private final List<Password> trys = new ArrayList<>();
 
-    public GameLogic(int combinationSize) {
-        this.password = new Password(combinationSize);
+    private final int maxTries;
+
+    public GameLogic(int combinationSize, int maxTries) {
+        this(new Password(combinationSize), maxTries);
+    }
+
+    public GameLogic(Password combination, int maxTries) {
+        this.password = combination;
+        this.maxTries = maxTries;
     }
 
     public Password getPassword() {
@@ -28,5 +35,9 @@ public class GameLogic {
 
     public List<Password> getTries() {
         return trys;
+    }
+
+    public int getMaxTries() {
+        return maxTries;
     }
 }
