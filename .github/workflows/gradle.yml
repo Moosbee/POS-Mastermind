@@ -9,15 +9,11 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "master" ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
