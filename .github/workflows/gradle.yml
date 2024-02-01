@@ -33,6 +33,8 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
+      - name: fatJar with Gradle Wrapper
+        run: ./gradlew fatJar
 
       - name: Release
         uses: "marvinpinto/action-automatic-releases@latest"
