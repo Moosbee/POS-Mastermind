@@ -11,7 +11,9 @@ public enum BaseSet {
     Green("G", Ansi.Color.GREEN),
     Blue("B", Ansi.Color.BLUE),
     Black("S", Ansi.Color.BLACK),
-    White("W", Ansi.Color.WHITE);
+    White("W", Ansi.Color.WHITE),
+
+    Empty("E", Ansi.Color.DEFAULT);
 
     public final String label;
     public final Ansi.Color color;
@@ -23,7 +25,7 @@ public enum BaseSet {
                 return set;
             }
         }
-        return BaseSet.Black;
+        return Empty;
     }
 
     BaseSet(String label, Ansi.Color color) {

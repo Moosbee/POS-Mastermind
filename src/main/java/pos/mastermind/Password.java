@@ -66,7 +66,7 @@ public class Password {
         BaseSet[] newSet = new BaseSet[combinationSize];
 
         for (int i = 0; i < newSet.length; i++) {
-            newSet[i] = base[random.nextInt(0, base.length)];
+            newSet[i] = base[random.nextInt(0, base.length - 1)];
         }
 
         return newSet;

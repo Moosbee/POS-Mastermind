@@ -39,15 +39,39 @@ public class UI {
 
                 """;
         System.out.println(ansi().fg(Ansi.Color.GREEN).a(hello).reset());
-        System.out.print(ansi().a("Bitte geben Sie die gr\u00F6\u00DFe der Kombination ein: ").reset());
-        System.out.print(ansi().fgBright(Ansi.Color.GREEN).a(Ansi.Attribute.BLINK_FAST).a(">").reset());
 
-        int suze = Integer.parseInt(lineReader.readLine());
 
-        System.out.print(ansi().a("Bitte geben Sie die Maximalzahl an Versuchen ein: ").reset());
-        System.out.print(ansi().fgBright(Ansi.Color.GREEN).a(Ansi.Attribute.BLINK_FAST).a(">").reset());
+        boolean invalidInput = true;
+        int suze = 10;
 
-        int tries = Integer.parseInt(lineReader.readLine());
+        while (invalidInput) {
+            System.out.print(ansi().a("Bitte geben Sie die gr\u00F6\u00DFe der Kombination ein: ").reset());
+            System.out.print(ansi().fgBright(Ansi.Color.GREEN).a(Ansi.Attribute.BLINK_FAST).a(">").reset());
+            try {
+                suze = Integer.parseInt(lineReader.readLine());
+                invalidInput = false;
+            } catch (NumberFormatException e) {
+                System.out.println(ansi().fgBrightRed().a("Bitte nur Zahlen eingeben!").reset());
+            }
+
+        }
+
+
+        invalidInput = true;
+        int tries = 10;
+
+        while (invalidInput) {
+            System.out.print(ansi().a("Bitte geben Sie die Maximalzahl an Versuchen ein: ").reset());
+            System.out.print(ansi().fgBright(Ansi.Color.GREEN).a(Ansi.Attribute.BLINK_FAST).a(">").reset());
+            try {
+                tries = Integer.parseInt(lineReader.readLine());
+
+                invalidInput = false;
+            } catch (NumberFormatException e) {
+                System.out.println(ansi().fgBrightRed().a("Bitte nur Zahlen eingeben!").reset());
+            }
+
+        }
 
         this.board = new GameLogic(suze, tries);
         for (int i = 0; i < board.getPassword().length() * 4; i++) {
@@ -128,20 +152,31 @@ public class UI {
 
         BaseSet[] newSet = new BaseSet[board.getPassword().length()];
 
-        for (int pos = 0; pos < newSet.length; pos++) {
+        Arrays.fill(newSet, BaseSet.Empty);
+
+        int pos = 0;
+        while (pos < newSet.length) {
 
 
             int key = lineReader.readCharacter();
 
             BaseSet text;
             text = BaseSet.byLabel(String.valueOf((char) key).toUpperCase(Locale.ROOT));
-            if (key == 'q') {
-                break;
-            }
 
-            System.out.print(ansi().fgBright(text.getColor()).a(text.getLabel()).reset());
-            System.out.print(ansi().cursorRight(3));
-            newSet[pos] = text;
+            if (text != BaseSet.Empty) {
+                System.out.print(ansi().fgBright(text.getColor()).a(text.getLabel()).reset());
+                System.out.print(ansi().cursorRight(3));
+                newSet[pos] = text;
+                pos++;
+            } else if (key == 'q') {
+                break;
+            } else if (key == 8) {
+                System.out.print(ansi().cursorLeft(4));
+                System.out.print(ansi().reset().a(" ").reset());
+                System.out.print(ansi().cursorLeft(1));
+
+                pos--;
+            }
 
         }
         System.out.println();
@@ -154,8 +189,9 @@ public class UI {
         BaseSet[] set = BaseSet.values();
 
         System.out.print(ansi().render("@|red F|@@|green a|@@|yellow r|@@|blue b|@@|magenta e|@@|cyan n|@@|white :|@").reset());
+        for (int i = 0; i < set.length - 1; i++) {
+            BaseSet baseSet = set[i];
 
-        for (BaseSet baseSet : set) {
             System.out.print(ansi().fgBright(baseSet.getColor()).a(", " + baseSet.name() + " (" + baseSet.getLabel() + ")"));
         }
     }
